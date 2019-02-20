@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 function LifeController(props){
   let message = 'broken';
@@ -18,6 +18,6 @@ function LifeController(props){
 
 LifeController.propTypes = {
   lifeStatus: PropTypes.bool.isRequired
-}
+};
 
 export default LifeController;
