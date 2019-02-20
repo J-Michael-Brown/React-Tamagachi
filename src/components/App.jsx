@@ -66,13 +66,25 @@ class App extends React.Component {
   render(){
     return (
       <div style={STYLES.tamagotchiBody}>
-        <div style={STYLES.screen}>
-          <LifeController lifeStatus={this.state.life}/>
-          <HungerDisplay hungerLevel={this.state.hunger}/>
-          <SleepDisplay sleepLevel={this.state.sleep}/>
-          <PlayDisplay playLevel={this.state.play}/>
-          <InputButtons onButtonClick={this.handleAddLife}/>
+        <div style={{position: 'relative', top: '25%'}}>
+
+          <div style={STYLES.screen}>
+            <LifeController lifeStatus={this.state.life}/>
+            <HungerDisplay hungerLevel={this.state.hunger}/>
+            <SleepDisplay sleepLevel={this.state.sleep}/>
+            <PlayDisplay playLevel={this.state.play}/>
+          </div>
+
+          <div style={{    display: 'table',  margin: '0 auto'}}>
+            <InputButtons onButtonClick={this.handleAddLife}/>
+          </div>
+
+
+
         </div>
+
+
+
       </div>
     );
   }

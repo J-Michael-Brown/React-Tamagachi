@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ActionButton from './ActionButton';
 
 function InputButtons(props){
   return(
     <div>
-      <button onClick={()=> props.onButtonClick('hunger')}>Hunger</button>
-      <button onClick={()=> props.onButtonClick('play')}>Hunger</button>
-      <button onClick={()=> props.onButtonClick('sleep')}>Hunger</button>
+      <ActionButton
+        buttonName='fa-hamburger'
+        onButtonClick={props.onButtonClick}
+        onButtonClickParam='hunger'/>
+
+      <ActionButton
+        buttonName='fa-bed'
+        onButtonClick={props.onButtonClick}
+        onButtonClickParam='sleep'/>
+
+      <ActionButton
+        buttonName='fa-football-ball'
+        onButtonClick={props.onButtonClick}
+        onButtonClickParam='play'/>
     </div>
   );
 }

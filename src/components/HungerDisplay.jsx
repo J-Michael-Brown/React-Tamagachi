@@ -8,7 +8,7 @@ function HungerDisplay(props){
   return(
     <div style={STYLES.statBarOutter}>
       <div style={ {...STYLES.statBarInner, width: (props.hungerLevel+ '%')} }>
-        <span style={{color: 'green'}}>Hunger</span>
+        <span style={STYLES.statBarText}>Hunger</span>
         &nbsp;
       </div>
     </div>
