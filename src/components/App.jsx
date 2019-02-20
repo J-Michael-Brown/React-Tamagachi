@@ -19,6 +19,30 @@ class App extends React.Component {
 
   }
 
+  componentDidMount() {
+    setInterval( () =>
+      this.updateLifeStats(),
+      2000
+    );
+  }
+
+  updateLifeStats() {
+    console.log("one step closer to death");
+
+    this.setState((state) => {
+      return {
+        hunger: state.hunger -= 1,
+        play: state.play -= 1,
+        sleep: state.sleep -= 1 
+      }
+    })
+    // let newMasterTicketList = this.state.masterTicketList.slice();
+    // newMasterTicketList.forEach((ticket) =>
+    //   ticket.formattedWaitTime = (ticket.timeOpen).fromNow(true)
+    // );
+    // this.setState({masterTicketList: newMasterTicketList})
+  }
+
 
   render(){
     return (
