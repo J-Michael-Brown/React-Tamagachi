@@ -4,6 +4,7 @@ import SleepDisplay from './SleepDisplay';
 import PlayDisplay from './PlayDisplay';
 import InputButtons from './InputButtons';
 import LifeController from './LifeController';
+import SuiSlider from './SuiSlider';
 
 import {STYLES} from '../styles';
 
@@ -13,20 +14,21 @@ class App extends React.Component {
 
     this.state = {
       life: true,
-      hunger: 15,
-      play: 75,
-      sleep: 55
+      hunger: 99,
+      play: 99,
+      sleep: 99,
+      framesPerSecond: 9
     };
 
     this.handleIsAlive = this.handleIsAlive.bind(this);
     this.handleAddLife = this.handleAddLife.bind(this);
+    this.handleSuiSlider = this.handleSuiSlider.bind(this);
 
   }
 
   componentDidMount() {
     this.globalTimer = setInterval( () =>
-      this.updateLifeStats(),
-    2000
+      this.updateLifeStats(), 1000
     );
   }
 
@@ -35,18 +37,23 @@ class App extends React.Component {
   }
 
   updateLifeStats() {
-    console.log('one step closer to death'); // eslint-disable-line no-console
+    // console.log('one step closer to death'); // eslint-disable-line no-console
 
     this.setState((state) => {
       return {
-        hunger: state.hunger -= 1,
-        play: state.play -= 1,
-        sleep: state.sleep -= 1
+        hunger: state.hunger -= 5/this.state.framesPerSecond,
+        play: state.play -= 5/this.state.framesPerSecond,
+        sleep: state.sleep -= 5/this.state.framesPerSecond
       };
     });
 
-    this.handleIsAlive();
+    // this.handleIsAlive();
 
+  }
+
+  handleSuiSlider(value) {
+    console.log('fps set to: ', value); // eslint-disable-line no-console
+    this.setState({framesPerSecond: value});
   }
 
   handleAddLife(statusName) {
@@ -66,7 +73,10 @@ class App extends React.Component {
   render(){
     return (
       <div style={STYLES.tamagotchiBody}>
-        <div style={{position: 'relative', top: '25%'}}>
+
+        <div style={STYLES.content}>
+
+          <SuiSlider onSuiSlider={this.handleSuiSlider}/>
 
           <div style={STYLES.screen}>
             <LifeController lifeStatus={this.state.life}/>
@@ -82,6 +92,7 @@ class App extends React.Component {
 
 
         </div>
+
 
 
 
