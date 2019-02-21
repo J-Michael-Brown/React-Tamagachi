@@ -1,15 +1,24 @@
 import React from 'react';
-import Tamagachi from './Tamagachi';
-import {Switch, Route} from 'react-router-dom';
-import {v4} from 'uuid';
+import HungerDisplay from './HungerDisplay';
+import SleepDisplay from './SleepDisplay';
+import PlayDisplay from './PlayDisplay';
+import InputButtons from './InputButtons';
+import LifeController from './LifeController';
+import SuiSlider from './SuiSlider';
 
-class App extends React.Component {
+import {STYLES} from '../styles';
+
+class Tamagachi extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      masterTamagachiList: {},
-      selectedTamagachi: null
+      life: true,
+      hunger: 99,
+      play: 99,
+      sleep: 99,
+      difficulty: 1,
+      frameRate: 70
     };
     this.handleIsAlive = this.handleIsAlive.bind(this);
     this.handleAddLife = this.handleAddLife.bind(this);
@@ -37,11 +46,6 @@ class App extends React.Component {
     this.handleIsAlive();
   }
 
-  handleAddTamagachi(newTamagachi) {
-    let newTamagachiId = v4();
-    let
-  }
-
   handleSuiSlider(value) {
     this.setState({difficulty: value});
   }
@@ -61,15 +65,28 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>
-        <Switch>
-          <Router exac path='/' render={() => <Tamagachi
-              life={}
-            />}/>
-        </Switch>
+      <div style={STYLES.tamagotchiBody}>
+
+        <div style={STYLES.content}>
+
+          <SuiSlider onSuiSlider={this.handleSuiSlider} difficulty={this.state.difficulty}/>
+          <div style={STYLES.screen}>
+            <LifeController lifeStatus={this.state.life}/>
+            <HungerDisplay hungerLevel={this.state.hunger}/>
+            <SleepDisplay sleepLevel={this.state.sleep}/>
+            <PlayDisplay playLevel={this.state.play}/>
+          </div>
+          <div style={{ display: 'table',  margin: '0 auto'}}>
+            <InputButtons onButtonClick={this.handleAddLife}/>
+          </div>
+
+
+        </div>
+
+
       </div>
     );
   }
 }
 
-export default App;
+export default Tamagachi;
