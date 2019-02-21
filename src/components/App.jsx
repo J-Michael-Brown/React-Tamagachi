@@ -17,7 +17,8 @@ class App extends React.Component {
       hunger: 99,
       play: 99,
       sleep: 99,
-      difficulty: 1
+      difficulty: 1,
+      frameRate: 70
     };
     this.handleIsAlive = this.handleIsAlive.bind(this);
     this.handleAddLife = this.handleAddLife.bind(this);
@@ -26,7 +27,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.globalTimer = setInterval( () =>
-      this.updateLifeStats(), 1000
+      this.updateLifeStats(), (1000/this.state.frameRate)
     );
   }
 
@@ -37,9 +38,9 @@ class App extends React.Component {
   updateLifeStats() {
     this.setState((state) => {
       return {
-        hunger: state.hunger -= this.state.difficulty,
-        play: state.play -= this.state.difficulty,
-        sleep: state.sleep -= this.state.difficulty
+        hunger: state.hunger -= this.state.difficulty/this.state.frameRate,
+        play: state.play -= this.state.difficulty/this.state.frameRate,
+        sleep: state.sleep -= this.state.difficulty/this.state.frameRate
       };
     });
     this.handleIsAlive();
