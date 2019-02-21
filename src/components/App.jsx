@@ -17,13 +17,11 @@ class App extends React.Component {
       hunger: 99,
       play: 99,
       sleep: 99,
-      framesPerSecond: 9
+      difficulty: 1
     };
-
     this.handleIsAlive = this.handleIsAlive.bind(this);
     this.handleAddLife = this.handleAddLife.bind(this);
     this.handleSuiSlider = this.handleSuiSlider.bind(this);
-
   }
 
   componentDidMount() {
@@ -37,23 +35,18 @@ class App extends React.Component {
   }
 
   updateLifeStats() {
-    // console.log('one step closer to death'); // eslint-disable-line no-console
-
     this.setState((state) => {
       return {
-        hunger: state.hunger -= 5/this.state.framesPerSecond,
-        play: state.play -= 5/this.state.framesPerSecond,
-        sleep: state.sleep -= 5/this.state.framesPerSecond
+        hunger: state.hunger -= this.state.difficulty,
+        play: state.play -= this.state.difficulty,
+        sleep: state.sleep -= this.state.difficulty
       };
     });
-
-    // this.handleIsAlive();
-
+    this.handleIsAlive();
   }
 
   handleSuiSlider(value) {
-    console.log('fps set to: ', value); // eslint-disable-line no-console
-    this.setState({framesPerSecond: value});
+    this.setState({difficulty: value});
   }
 
   handleAddLife(statusName) {
@@ -69,31 +62,25 @@ class App extends React.Component {
     }
   }
 
-
   render(){
     return (
       <div style={STYLES.tamagotchiBody}>
 
         <div style={STYLES.content}>
 
-          <SuiSlider onSuiSlider={this.handleSuiSlider}/>
-
+          <SuiSlider onSuiSlider={this.handleSuiSlider} difficulty={this.state.difficulty}/>
           <div style={STYLES.screen}>
             <LifeController lifeStatus={this.state.life}/>
             <HungerDisplay hungerLevel={this.state.hunger}/>
             <SleepDisplay sleepLevel={this.state.sleep}/>
             <PlayDisplay playLevel={this.state.play}/>
           </div>
-
-          <div style={{    display: 'table',  margin: '0 auto'}}>
+          <div style={{ display: 'table',  margin: '0 auto'}}>
             <InputButtons onButtonClick={this.handleAddLife}/>
           </div>
 
 
-
         </div>
-
-
 
 
       </div>
